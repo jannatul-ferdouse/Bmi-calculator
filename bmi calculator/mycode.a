@@ -1,0 +1,84 @@
+.model small
+.stack 100h
+.data
+
+ msg1  db "enter numbers for  add:$"
+ msg2 db "enter numbers for  sum:$"
+ msg3 db  "enter numbers for  mul:$"
+ msg4 db "the sum is:$"
+ msg5 db "enter to recalculate:$"
+ .code
+ 
+ main proc
+ mov ax,@data
+ mov ds,ax 
+ 
+ start:
+ mov ah,9
+ lea dx,msg1
+ int 21h
+ 
+ 
+ mov ah,1
+ int 21h
+ 
+ 
+ mov bl,al 
+ int 21h
+ 
+ mov cl,al
+ add bl,cl
+ 
+ 
+ 
+ mov ah,2
+ mov dl,10
+ int 21h
+ mov dl,13
+ int 21h  
+ 
+  mov ah,9
+ lea dx,msg4
+ int 21h
+ 
+ 
+ mov ah,2
+ sub bl,48 
+ mov dl,bl
+ int 21h 
+ 
+  mov ah,2
+ mov dl,10
+ int 21h
+ mov dl,13
+ int 21h  
+ 
+ 
+ 
+  mov ah,9
+ lea dx,msg5
+ int 21h 
+ mov ah,1
+ 
+ int 21h
+ mov cl,al
+ 
+  mov ah,2
+ mov dl,10
+ int 21h
+ mov dl,13
+ int 21h 
+ 
+ cmp cl,'Y'
+ je start
+ 
+ cmp cl,'N'
+ je exit
+ 
+ 
+
+ 
+  exit:
+    mov ah,4ch
+    int 21h
+    main endp
